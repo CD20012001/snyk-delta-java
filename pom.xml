@@ -11,11 +11,18 @@
 
     <dependencies>
 
-        <!-- Known vulnerable version — same idea as your lodash/minimist -->
+        <!-- Already in baseline — snyk-delta will IGNORE this -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.14.1</version>
+        </dependency>
+
+        <!-- NEW vulnerable dep added in PR — snyk-delta will CATCH this -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
         </dependency>
 
     </dependencies>
