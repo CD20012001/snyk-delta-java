@@ -1,0 +1,25 @@
+name: CI — Java
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  setup-java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+
+  security:
+    needs: setup-java
+    uses: CD20012001/central-workflow-delta/.github/workflows/snyk-sca.yml@main
+    with:
+      install-command: mvn dependency:resolve --no-transfer-progress
+      severity-threshold: high
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
